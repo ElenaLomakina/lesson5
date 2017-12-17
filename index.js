@@ -38,14 +38,12 @@ var isCorrect1 = curNames.some(function(cur, i, arr){
 });
 
 var isCorrect2 = curNames.some(function(cur, i, arr){
-    return cur2 ===cur;
+    return cur2 === cur;
 });
+
 var isCorrect = isCorrect1 && isCorrect2;
 
-
-alert(isCorrect);
-
-if (!isCorrect ) {
+if (!isCorrect) {
     alert("Sorry, we can not exchange this currency");
 }
 else{
@@ -56,7 +54,6 @@ else{
         sum2 = exchange(cur1, cur2);
         alert( sum1 +" " + cur1 + " is " + sum2 + " " + cur2);
     }
-
 }
 
 
