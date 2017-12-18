@@ -59,11 +59,12 @@
 // --Task 2. Create of Army --------------------------------------------------------------------------------
 
 var myArmy = [];
+var anotherArmy = [];
 
 
 // a.  Adding resources to myArmy ---------------------------------------------------------------------------------
 
-function addResource(type, name, health, livesLeft, livesMax, distAvailable, distMax) {
+function addResource(arr, type, name, health, livesLeft, livesMax, distAvailable, distMax) {
     var obj = {
         "type": type,
         "name": name,
@@ -73,7 +74,7 @@ function addResource(type, name, health, livesLeft, livesMax, distAvailable, dis
         "distanceAvailable": distAvailable,
         "distanceMax": distMax
     };
-    myArmy.push(obj);
+    arr.push(obj);
 }
 
 
@@ -91,7 +92,14 @@ function canMoveOn(i) {
 }
 
 function answerCanMove(i) {
-    return canMoveOn(i)? "He can move on." : "He can't move on today. His limit was reached, he needs rest.";
+    if (i === undefined) {
+        return canMoveOn(i)? "The whole army can move on." :  "The whole army can't move on today. Somebody needs rest.";
+    }
+    else {
+        var res = myArmy[i];
+        var resName = res.name;
+        return canMoveOn(i)? resName + " can move on.":  resName + " can't move on today. His limit was reached, he needs rest.";
+    }
 }
 
 
@@ -121,18 +129,49 @@ function getRest(i) {
 }
 
 
-// e. --
+// e. function return array of resources, who can move on , whose available distance less then given ----------------
+
+function whoCanGo(dist) {
+    return myArmy.filter(function (value) {
+        return value.distanceAvailable > dist; });
+}
+
+
+// f.	function unites two arrays ----------------------------------------------------------------------------------
+
+function unite(arr) {
+    return myArmy.concat(arr);
+}
+
+// g. function check, ready every resource of army for battle or not.  ----------------------------------------------
+
+function isReadyForBattle(loss) {
+    return myArmy.every(function (value) {
+        return value.health >= 1 - loss;
+    });
+}
+
 
 
 //--------------- check ---------------------------------------------------------------------------------------------
-addResource("warrior", "Vedmak", 0.7, 5, 7, 3, 10);
-addResource("horse", "Bolivar", 0.5, 1, 3, 30, 50);
-addResource("car", "Bumblebee", 0.6, 6, 10, 0, 500);
+addResource(myArmy, "warrior", "Vedmak", 0.7, 5, 7, 13, 20);
+addResource(myArmy, "horse", "Bolivar", 0.5, 1, 3, 30, 50);
+addResource(myArmy, "machine", "Bumblebee", 0.6, 6, 10, 0, 500);
 
 console.log(myArmy);
 console.log(answerCanMove());
+console.log(answerCanMove(2));
+console.log("They can move on: ", whoCanGo(50));
 
 getHealth(0);
 getRest(2);
 
 console.log(answerCanMove());
+console.log("They can move on: ", whoCanGo(50));
+
+addResource(anotherArmy, "warrior", "Darth Vader", 0.8, 4, 7, 15, 20);
+addResource(anotherArmy, "machine", "R2D2", 1, 20, 30, 5, 10);
+
+console.log(unite(anotherArmy));
+
+console.log(isReadyForBattle(0.5));
