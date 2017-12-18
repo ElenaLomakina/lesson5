@@ -1,4 +1,4 @@
-// -- exchange of currency ----------------------------------------------------------------------
+// -- Task 1. Exchange of currency ----------------------------------------------------------------------
 
 var cur1, cur2, sum1, sum2;
 var rateUSD = 28;
@@ -32,11 +32,11 @@ cur1 = prompt("Choose the currency you want to exchange: USD, EUR, UAH");
 cur2 = prompt("Choose the currency to which you want to change: USD, EUR, UAH");
 sum1 = prompt("Enter your sum");
 
-var isCorrect1 = curNames.some(function(cur, i, arr){
+var isCorrect1 = curNames.some(function(cur){
     return cur1 === cur;
 });
 
-var isCorrect2 = curNames.some(function(cur, i, arr){
+var isCorrect2 = curNames.some(function(cur){
     return cur2 === cur;
 });
 
@@ -56,19 +56,71 @@ else{
 }
 
 
-// -- create of object ----------------------------------------------------------------------
+// --Task 2. Create of Army --------------------------------------------------------------------------------
 
 var myArmy = [];
 
-function addResource(type, name, leftL, maxL, leftD, maxD) {
+
+// a.  Adding resources to myArmy --------------------------------------------------------------------------
+
+function addResource(type, name, health, livesLeft, livesMax, distAvailable, distMax) {
     var obj = {
         "type": type,
         "name": name,
-        "leftLifes": leftL,
-        "maxLifes": maxL,
-        "leftDistance": leftD,
-        "maxDistance": maxD
+        "health": health,
+        "livesLeft": livesLeft,
+        "livesMax": livesMax,
+        "distanceAvailable": distAvailable,
+        "distanceMax": distMax
     };
     myArmy.push(obj);
 }
 
+
+// b. function check, can the whole my army move on or not.  -----------------------------------------------
+
+function canMoveOn() {
+    var canMove = myArmy.every(function(obj){return obj.distanceAvailable > 0;});
+    return canMove? "You can move on." : "You can't move on today. You have reached your limit.";
+}
+
+
+// c. function enlarges  health to max for i-element of army, or for each elements, if "i" wasn't pointed ---
+
+function getHealth(i) {
+    if (i === undefined) {
+        myArmy.forEach(function(obj){obj.health = 1;} );
+    }
+    else {
+        var obj = myArmy[i];
+        obj.health = 1;
+    }
+}
+
+
+// d. function enlarges available distance to max for i-element of army, or for each elements, if "i" wasn't pointed -
+
+function getRest(i) {
+    if (i === undefined) {
+        myArmy.forEach(function(obj){obj.distanceAvailable = obj.distanceMax;} );
+    }
+    else {
+        var obj = myArmy[i];
+        obj.distanceAvailable = obj.distanceMax;
+    }
+}
+
+
+// e. --
+
+
+//--------------- check ------------------
+addResource("warrior", "Vedmak", 0.7, 5, 7, 3, 10);
+addResource("horse", "Bolivar", 0.5, 1, 3, 30, 50);
+addResource("car", "Bumblebee", 0.6, 6, 10, 300, 500);
+
+console.log(myArmy);
+console.log(canMoveOn());
+
+getHealth(0);
+getRest(2);
