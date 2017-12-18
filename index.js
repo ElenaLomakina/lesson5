@@ -1,5 +1,4 @@
 // -- exchange of currency ----------------------------------------------------------------------
-//Функция должна иметь проверку только на правильность указания валюты и ее наличие в списке доступных
 
 var cur1, cur2, sum1, sum2;
 var rateUSD = 28;
@@ -57,4 +56,19 @@ else{
 }
 
 
+// -- create of object ----------------------------------------------------------------------
+
+var myArmy = [];
+
+function addResource(type, name, leftL, maxL, leftD, maxD) {
+    var obj = {
+        "type": type,
+        "name": name,
+        "leftLifes": leftL,
+        "maxLifes": maxL,
+        "leftDistance": leftD,
+        "maxDistance": maxD
+    };
+    myArmy.push(obj);
+}
 
