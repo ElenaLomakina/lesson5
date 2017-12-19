@@ -151,6 +151,18 @@ function isReadyForBattle(loss) {
     });
 }
 
+// h.	function rebuilds arr in order [index1, index2, ...]  -------------------------------------------------------
+
+function rebuilding(arr, index1, index2) {
+    var newArr = arr.map(function (value) { return value });
+    var arg = Array.prototype.slice.call(arguments, 1);
+    for (var i=0; i< arr.length; i++){
+        newArr[i] = arr[arg[i]];
+    }
+    return newArr;
+}
+
+
 
 
 //--------------- check ---------------------------------------------------------------------------------------------
@@ -172,6 +184,10 @@ console.log("They can move on: ", whoCanGo(50));
 addResource(anotherArmy, "warrior", "Darth Vader", 0.8, 4, 7, 15, 20);
 addResource(anotherArmy, "machine", "R2D2", 1, 20, 30, 5, 10);
 
-console.log(unite(anotherArmy));
+var unitedArmy = unite(anotherArmy);
+console.log(unitedArmy);
 
 console.log(isReadyForBattle(0.5));
+
+console.log(rebuilding(myArmy, 2, 0, 1));
+console.log(rebuilding(unitedArmy, 0, 3, 1, 2, 4));
