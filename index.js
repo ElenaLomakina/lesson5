@@ -163,6 +163,11 @@ function rebuilding(arr, index1, index2) {
 }
 
 
+// i.	Написать функцию клонирования объекта по получению его ссылки, либо индекса в массиве.
+
+function getCloneElement(arr, index) {
+    return Object.assign({}, arr[index]);
+}
 
 
 //--------------- check ---------------------------------------------------------------------------------------------
@@ -191,3 +196,5 @@ console.log(isReadyForBattle(0.5));
 
 console.log(rebuilding(myArmy, 2, 0, 1));
 console.log(rebuilding(unitedArmy, 0, 3, 1, 2, 4));
+
+console.log(getCloneElement(myArmy, 2));
